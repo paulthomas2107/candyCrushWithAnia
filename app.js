@@ -36,10 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function dragStart() {
     colorBeingDragged = this.style.backgroundColor;
     squareIdBeingDragged = parseInt(this.id);
-    console.log(this.id, 'dragStart', colorBeingDragged);
   }
   function dragEnd() {
-    console.log(this.id, 'dragEnd');
     let validMoves = [
       squareIdBeingDragged - 1,
       squareIdBeingDragged - width,
@@ -63,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let rowOfThree = [i, i + 1, i + 2];
       let decidedColor = squares[i].style.backgroundColor;
       const isBlank = squares[i].style.backgroundColor === '';
-
+      const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
+      if (notValid.includes(i)) continue;
       if (
         rowOfThree.every(
           (index) =>
@@ -105,17 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function dragOver(e) {
     e.preventDefault();
-    console.log(this.id, 'dragOver');
   }
   function dragEnter(e) {
     e.preventDefault();
-    console.log(this.id, 'dragEnter');
   }
-  function dragLeave() {
-    console.log(this.id, 'dragLeave');
-  }
+  function dragLeave() {}
   function dragDrop() {
-    console.log(this.id, 'dragDrop');
     colorBeingReplaced = this.style.backgroundColor;
     squareIdBeingReplaced = parseInt(this.id);
     this.style.backgroundColor = colorBeingDragged;
