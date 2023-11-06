@@ -78,8 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function checkColumnForThree() {
+    for (i = 0; i < 47; i++) {
+      let columnOfThree = [i, i + width, i + width * 2];
+      let decidedColor = squares[i].style.backgroundColor;
+      const isBlank = squares[i].style.backgroundColor === '';
+
+      if (
+        columnOfThree.every(
+          (index) =>
+            squares[index].style.backgroundColor === decidedColor && !isBlank
+        )
+      ) {
+        score += 3;
+        columnOfThree.forEach((index) => {
+          squares[index].style.backgroundColor = '';
+        });
+      }
+    }
+  }
+
   window.setInterval(function () {
     checkRowForThree();
+    checkColumnForThree();
   }, 100);
 
   function dragOver(e) {
